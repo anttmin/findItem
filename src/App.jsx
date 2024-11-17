@@ -1,22 +1,24 @@
-import React from 'react'
-import Child1 from './Components/Child1'
-import Child2 from './Components/Child2'
-import Child3 from './Components/Child3'
-import FirstContentProvider, { FirstContent } from './FirstContent'
-
-
+import React, { useState } from 'react'
+import Finditem from './One/Finditem'
+import Show from './One/Show'
 
 const App = () => {
+  const[getDatass,setGetdata] = useState([])
+
+  const getDatas = (getInfo) => {
+
+  setGetdata([...getDatass,getInfo])
+
+  }
+
   return (
-    <div>
-
-      <FirstContentProvider>
-        <Child1 />
-        <Child2 />
-        <Child3 />
-      </FirstContentProvider>
-
-
+    <div className='flex justify-center items-center flex-col h-[100vh]'>
+        <Finditem getDatas={getDatas} />
+        {
+          getDatass.length < 1 ? <p className='bg-yellow-400 text-black mt-2 rounded-md p-2'>Please Enter Valid data!!</p> :getDatass.map((getDatass)=>(
+            <Show  getDatas={getDatas} name={getDatass.name} live={getDatass.live} email={getDatass.email} key={getDatass.live}/>
+          ))
+        }
     </div>
   )
 }
